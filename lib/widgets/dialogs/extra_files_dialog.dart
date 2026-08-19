@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../l10n/app_localizations.dart';
 import '../../utils/dialog_helper.dart';
 import '../../providers/project_provider.dart';
 import '../../utils/downloader.dart';
@@ -112,7 +113,7 @@ class ExtraFilesDialog extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: Text('Close', style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
+          child: Text(AppLocalizations.of(context).closeBtn, style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
         ),
       ],
     );

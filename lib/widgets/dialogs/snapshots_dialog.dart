@@ -74,7 +74,7 @@ class SnapshotsDialog extends StatelessWidget {
               elevation: 0,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             ),
-            child: const Text('Save'),
+            child: Text(AppLocalizations.of(context).saveBtn),
           ),
         ],
       ),

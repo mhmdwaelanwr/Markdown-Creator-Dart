@@ -769,7 +769,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> with Single
               Text('Public Templates', style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.bold)),
               const Spacer(),
               ElevatedButton.icon(
-                onPressed: () => ToastHelper.show(context, 'Feature: Add Template UI coming soon'),
+                onPressed: () => _showAddTemplateDialog(),
                 icon: const Icon(Icons.add, color: Colors.white),
                 label: const Text('ADD NEW TEMPLATE', style: TextStyle(color: Colors.white)),
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
@@ -821,6 +821,79 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> with Single
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  void _showAddTemplateDialog() {
+    final nameController = TextEditingController();
+    final descController = TextEditingController();
+    final contentController = TextEditingController();
+    String selectedCategory = 'General';
+
+    showDialog(
+      context: context,
+      builder: (ctx) => StatefulBuilder(
+        builder: (ctx, setDialogState) => AlertDialog(
+          title: Text('Add Public Template', style: GoogleFonts.inter(fontWeight: FontWeight.bold)),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: nameController,
+                  decoration: const InputDecoration(labelText: 'Template Name', border: OutlineInputBorder()),
+                ),
+                const SizedBox(height: 12),
+                TextField(
+                  controller: descController,
+                  decoration: const InputDecoration(labelText: 'Description', border: OutlineInputBorder()),
+                  maxLines: 2,
+                ),
+                const SizedBox(height: 12),
+                DropdownButtonFormField<String>(
+                  initialValue: selectedCategory,
+                  decoration: const InputDecoration(labelText: 'Category', border: OutlineInputBorder()),
+                  items: ['General', 'Portfolio', 'API', 'Library', 'Mobile', 'Web'].map((c) {
+                    return DropdownMenuItem(value: c, child: Text(c));
+                  }).toList(),
+                  onChanged: (val) {
+                    if (val != null) setDialogState(() => selectedCategory = val);
+                  },
+                ),
+                const SizedBox(height: 12),
+                TextField(
+                  controller: contentController,
+                  decoration: const InputDecoration(
+                    labelText: 'Template Content (JSON)',
+                    border: OutlineInputBorder(),
+                    hintText: '{"elements": [...]}',
+                  ),
+                  maxLines: 6,
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
+            FilledButton(
+              onPressed: () async {
+                if (nameController.text.isEmpty) return;
+                await _firestoreService.addPublicTemplate(
+                  name: nameController.text,
+                  description: descController.text,
+                  category: selectedCategory,
+                  content: contentController.text,
+                );
+                if (mounted) {
+                  Navigator.pop(ctx);
+                  ToastHelper.show(context, 'Template added successfully');
+                }
+              },
+              child: const Text('Add Template'),
+            ),
+          ],
+        ),
       ),
     );
   }

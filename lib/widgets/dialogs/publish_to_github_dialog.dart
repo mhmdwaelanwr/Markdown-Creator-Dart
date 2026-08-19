@@ -131,7 +131,7 @@ class _PublishToGitHubDialogState extends State<PublishToGitHubDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: Text('Cancel', style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
+          child: Text(AppLocalizations.of(context).cancelBtn, style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
         ),
         _buildPublishButton(),
       ],

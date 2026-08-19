@@ -73,6 +73,23 @@ class FirestoreService {
     await db.collection('public_templates').doc(id).delete();
   }
 
+  Future<void> addPublicTemplate({
+    required String name,
+    required String description,
+    required String category,
+    required String content,
+  }) async {
+    final db = _db;
+    if (db == null) return;
+    await db.collection('public_templates').add({
+      'name': name,
+      'description': description,
+      'category': category,
+      'content': content,
+      'createdAt': FieldValue.serverTimestamp(),
+    });
+  }
+
   // --- Personal Collections ---
   DocumentReference? get _userDoc {
     final auth = _auth;

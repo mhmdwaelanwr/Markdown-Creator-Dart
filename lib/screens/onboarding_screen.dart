@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import '../l10n/app_localizations.dart';
 import '../providers/project_provider.dart';
 import '../utils/templates.dart';
 import '../models/readme_element.dart';
@@ -157,18 +158,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Widget _buildStep1() {
+    final l10n = AppLocalizations.of(context);
     return Column(
       key: const ValueKey(0),
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          'Welcome to Readme Creator! 🚀',
+          l10n.welcomeToReadmeCreator,
           style: GoogleFonts.poppins(fontSize: 28, fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 12),
         Text(
-          'What are you looking to build today?',
+          l10n.whatToBuild,
           style: GoogleFonts.inter(fontSize: 16, color: Colors.grey, fontWeight: FontWeight.w500),
         ),
         const SizedBox(height: 48),
@@ -177,15 +179,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           children: [
             _buildOptionCard(
               icon: Icons.auto_awesome_motion_rounded,
-              title: 'Project README',
-              subtitle: 'Software & Apps',
+              title: l10n.projectReadme,
+              subtitle: l10n.softwareAndApps,
               value: 'project',
             ),
             const SizedBox(width: 20),
             _buildOptionCard(
               icon: Icons.face_rounded,
-              title: 'GitHub Profile',
-              subtitle: 'Personal Portfolio',
+              title: l10n.githubProfile,
+              subtitle: l10n.personalPortfolio,
               value: 'profile',
             ),
           ],
@@ -236,28 +238,29 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Widget _buildStep2() {
+    final l10n = AppLocalizations.of(context);
     return Column(
       key: const ValueKey(1),
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          _goal == 'project' ? 'Project Intelligence' : 'Personal Branding',
+          _goal == 'project' ? l10n.projectIntelligence : l10n.personalBranding,
           style: GoogleFonts.poppins(fontSize: 26, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
         Text(
-          'Fill in the basics to generate your template.',
+          l10n.fillBasics,
           style: GoogleFonts.inter(color: Colors.grey),
         ),
         const SizedBox(height: 40),
         if (_goal == 'project') ...[
-          _buildTextField(controller: _projectNameController, label: 'Project Name', icon: Icons.title_rounded),
+          _buildTextField(controller: _projectNameController, label: l10n.projectName, icon: Icons.title_rounded),
           const SizedBox(height: 16),
-          _buildTextField(controller: _projectDescController, label: 'Brief Description', icon: Icons.description_rounded, maxLines: 3),
+          _buildTextField(controller: _projectDescController, label: l10n.briefDescription, icon: Icons.description_rounded, maxLines: 3),
         ] else ...[
-          _buildTextField(controller: _usernameController, label: 'GitHub Username', icon: Icons.alternate_email_rounded),
+          _buildTextField(controller: _usernameController, label: l10n.githubUsername, icon: Icons.alternate_email_rounded),
           const SizedBox(height: 16),
-          _buildTextField(controller: _roleController, label: 'Professional Title', icon: Icons.badge_rounded, hint: 'e.g. Flutter Developer'),
+          _buildTextField(controller: _roleController, label: l10n.professionalTitle, icon: Icons.badge_rounded, hint: 'e.g. Flutter Developer'),
         ],
       ],
     );
@@ -278,6 +281,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Widget _buildBottomActions(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Padding(
       padding: const EdgeInsets.all(32.0),
       child: Row(
@@ -285,7 +289,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         children: [
           TextButton(
             onPressed: () => _step > 0 ? setState(() => _step--) : Navigator.pop(context),
-            child: Text(_step > 0 ? 'Go Back' : 'Skip Setup', style: GoogleFonts.inter(color: Colors.grey, fontWeight: FontWeight.w600)),
+            child: Text(_step > 0 ? l10n.goBack : l10n.skipSetup, style: GoogleFonts.inter(color: Colors.grey, fontWeight: FontWeight.w600)),
           ),
           ElevatedButton(
             onPressed: () {
@@ -302,7 +306,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
               elevation: 0,
             ),
-            child: Text(_step == 0 ? 'Continue' : 'Start Creating', style: GoogleFonts.inter(fontWeight: FontWeight.bold, fontSize: 16)),
+            child: Text(_step == 0 ? l10n.continueBtn : l10n.startCreating, style: GoogleFonts.inter(fontWeight: FontWeight.bold, fontSize: 16)),
           ),
         ],
       ),

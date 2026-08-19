@@ -41,6 +41,7 @@ class _GenerateCodebaseDialogState extends State<GenerateCodebaseDialog> with Si
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context)!;
 
     return StyledDialog(
       title: DialogHeader(
@@ -74,9 +75,9 @@ class _GenerateCodebaseDialogState extends State<GenerateCodebaseDialog> with Si
                 ),
                 dividerColor: Colors.transparent,
                 labelStyle: GoogleFonts.inter(fontWeight: FontWeight.bold),
-                tabs: const [
-                  Tab(text: 'Local Folder'),
-                  Tab(text: 'GitHub Repo'),
+                tabs: [
+                  Tab(text: l10n.localFolderTab),
+                  Tab(text: l10n.githubRepoTab),
                 ],
               ),
             ),
@@ -95,7 +96,7 @@ class _GenerateCodebaseDialogState extends State<GenerateCodebaseDialog> with Si
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: Text('Cancel', style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
+            child: Text(l10n.cancelBtn, style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
         ),
       ],
     );
@@ -112,17 +113,17 @@ class _GenerateCodebaseDialogState extends State<GenerateCodebaseDialog> with Si
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const GlassCard(
+        GlassCard(
           opacity: 0.1,
           color: Colors.blue,
           child: Row(
             children: [
-              Icon(Icons.info_outline_rounded, color: Colors.blue, size: 20),
-              SizedBox(width: 12),
+              const Icon(Icons.info_outline_rounded, color: Colors.blue, size: 20),
+              const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  'Point to your project folder, and our AI will analyze the structure to generate a tailored README.',
-                  style: TextStyle(fontSize: 13, color: Colors.grey),
+                  l10n.pointToFolderHint,
+                  style: const TextStyle(fontSize: 13, color: Colors.grey),
                 ),
               ),
             ],
@@ -131,7 +132,7 @@ class _GenerateCodebaseDialogState extends State<GenerateCodebaseDialog> with Si
         const SizedBox(height: 24),
         _buildTextField(
           controller: _pathController,
-          label: 'Project Path',
+          label: l10n.projectPath,
           icon: Icons.folder_open_rounded,
           suffix: IconButton(
             icon: const Icon(Icons.search_rounded),
@@ -145,7 +146,7 @@ class _GenerateCodebaseDialogState extends State<GenerateCodebaseDialog> with Si
         ),
         const SizedBox(height: 32),
         _buildActionButton(
-          label: 'Analyze & Generate',
+          label: l10n.analyzeAndGenerate,
           onPressed: _isLoading ? null : () => _generateFromLocal(context),
           isLoading: _isLoading,
         ),
@@ -157,17 +158,17 @@ class _GenerateCodebaseDialogState extends State<GenerateCodebaseDialog> with Si
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const GlassCard(
+        GlassCard(
           opacity: 0.1,
           color: Colors.blue,
           child: Row(
             children: [
-              Icon(Icons.info_outline_rounded, color: Colors.blue, size: 20),
-              SizedBox(width: 12),
+              const Icon(Icons.info_outline_rounded, color: Colors.blue, size: 20),
+              const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  'Paste a public GitHub URL to automatically fetch and document your repository.',
-                  style: TextStyle(fontSize: 13, color: Colors.grey),
+                  l10n.pasteGithubUrlHint,
+                  style: const TextStyle(fontSize: 13, color: Colors.grey),
                 ),
               ),
             ],
@@ -176,13 +177,13 @@ class _GenerateCodebaseDialogState extends State<GenerateCodebaseDialog> with Si
         const SizedBox(height: 24),
         _buildTextField(
           controller: _repoUrlController,
-          label: 'GitHub Repository URL',
+          label: l10n.githubRepoUrl,
           hint: 'https://github.com/user/repo',
           icon: Icons.link_rounded,
         ),
         const SizedBox(height: 32),
         _buildActionButton(
-          label: 'Fetch & Generate',
+          label: l10n.fetchAndGenerateBtn,
           onPressed: _isLoading ? null : () => _generateFromGitHub(context),
           isLoading: _isLoading,
         ),

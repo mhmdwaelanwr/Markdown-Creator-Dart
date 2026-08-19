@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_highlight/flutter_highlight.dart';
 import 'package:flutter_highlight/themes/github.dart';
 import 'package:flutter_highlight/themes/dracula.dart';
+import '../l10n/app_localizations.dart';
 
 class FundingGeneratorScreen extends StatefulWidget {
   const FundingGeneratorScreen({super.key});
@@ -71,17 +72,18 @@ class _FundingGeneratorScreenState extends State<FundingGeneratorScreen> {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final code = _generateYaml();
+    final l10n = AppLocalizations.of(context);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Funding Generator (FUNDING.yml)', style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
+        title: Text(l10n.fundingGeneratorTitle, style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
         actions: [
           IconButton(
             icon: const Icon(Icons.copy),
-            tooltip: 'Copy YAML',
+            tooltip: l10n.copyYaml,
             onPressed: () {
               Clipboard.setData(ClipboardData(text: code));
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Copied to clipboard')));
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(l10n.copiedToClipboardShort)));
             },
           ),
         ],
@@ -95,35 +97,35 @@ class _FundingGeneratorScreenState extends State<FundingGeneratorScreen> {
               padding: const EdgeInsets.all(24),
               children: [
                 Text(
-                  'Sponsorships',
+                  l10n.sponsorships,
                   style: GoogleFonts.inter(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Sponsorships help your community know how to financially support this repository.\nThis generates a FUNDING.yml file for your .github folder.',
+                  l10n.sponsorshipsDesc,
                   style: GoogleFonts.inter(color: Colors.grey, fontSize: 14),
                 ),
                 const SizedBox(height: 24),
 
-                _buildSectionTitle('Supported Platforms'),
-                _buildTextField('GitHub Username(s)', 'e.g. users (comma separated)', (val) => setState(() => _github = val)),
-                _buildTextField('Patreon Username', 'e.g. user', (val) => setState(() => _patreon = val)),
-                _buildTextField('Open Collective', 'e.g. project', (val) => setState(() => _openCollective = val)),
-                _buildTextField('Ko-fi Username', 'e.g. user', (val) => setState(() => _koFi = val)),
-                _buildTextField('Tidelift', 'e.g. platform/package', (val) => setState(() => _tidelift = val)),
-                _buildTextField('Community Bridge', 'e.g. cloud-foundry', (val) => setState(() => _communityBridge = val)),
-                _buildTextField('Liberapay', 'e.g. user', (val) => setState(() => _liberapay = val)),
-                _buildTextField('IssueHunt', 'e.g. user', (val) => setState(() => _issuehunt = val)),
+                _buildSectionTitle(l10n.supportedPlatforms),
+                _buildTextField(l10n.githubUsernames, 'e.g. users (comma separated)', (val) => setState(() => _github = val)),
+                _buildTextField(l10n.patreonUsername, 'e.g. user', (val) => setState(() => _patreon = val)),
+                _buildTextField(l10n.openCollective, 'e.g. project', (val) => setState(() => _openCollective = val)),
+                _buildTextField(l10n.kofiUsername, 'e.g. user', (val) => setState(() => _koFi = val)),
+                _buildTextField(l10n.tidelift, 'e.g. platform/package', (val) => setState(() => _tidelift = val)),
+                _buildTextField(l10n.communityBridge, 'e.g. cloud-foundry', (val) => setState(() => _communityBridge = val)),
+                _buildTextField(l10n.liberapay, 'e.g. user', (val) => setState(() => _liberapay = val)),
+                _buildTextField(l10n.issueHunt, 'e.g. user', (val) => setState(() => _issuehunt = val)),
 
                 const SizedBox(height: 24),
-                _buildSectionTitle('Custom Links'),
+                _buildSectionTitle(l10n.customLinks),
                 Row(
                   children: [
                     Expanded(
                       child: TextField(
                         controller: _customController,
-                        decoration: const InputDecoration(
-                          labelText: 'Custom URL',
+                        decoration: InputDecoration(
+                          labelText: l10n.customUrl,
                           hintText: 'https://paypal.me/user',
                           border: OutlineInputBorder(),
                         ),
@@ -163,7 +165,7 @@ class _FundingGeneratorScreenState extends State<FundingGeneratorScreen> {
                     decoration: BoxDecoration(
                       border: Border(bottom: BorderSide(color: Colors.grey.withAlpha(50))),
                     ),
-                    child: Text('Preview (.github/FUNDING.yml)', style: GoogleFonts.inter(fontWeight: FontWeight.bold, color: Colors.grey)),
+                    child: Text(l10n.fundingYamlPreview, style: GoogleFonts.inter(fontWeight: FontWeight.bold, color: Colors.grey)),
                   ),
                   Expanded(
                     child: SingleChildScrollView(

@@ -1058,4 +1058,111 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get useThisGist => 'Use This Gist';
+
+  @override
+  String get projectHealthCenter => 'Project Health Center';
+  @override
+  String get eliteDocumentation => 'Elite Documentation';
+  @override
+  String get optimizationRequired => 'Optimization Required';
+  @override
+  String get scoreBasedOnGitHub => 'Score based on GitHub quality standards.';
+  @override
+  String get aiStrategicAudit => 'AI STRATEGIC AUDIT';
+  @override
+  String get aiAnalysisFailed => 'AI analysis failed or took too long.';
+  @override
+  String get structuralAudit => 'STRUCTURAL AUDIT';
+  @override
+  String get allChecksPassed => 'All structural checks passed!';
+  @override
+  String get feedbackAndSupport => 'Feedback & Support';
+  @override
+  String get howCanWeHelp => 'How can we help you?';
+  @override
+  String get describeIssueHint => 'Describe your issue... (Ctrl+V to paste image)';
+  @override
+  String get sendFeedback => 'Send Feedback';
+  @override
+  String get sending => 'Sending...';
+  @override
+  String get dropImageHere => 'Drop image here!';
+  @override
+  String get attachmentDropOrPaste => 'Attachment (Drop or Paste)';
+  @override
+  String get addFile => 'Add File';
+  @override
+  String get fundingYamlPreview => 'Preview (.github/FUNDING.yml)';
+  @override
+  String get copyYaml => 'Copy YAML';
+  @override
+  String get copiedToClipboardShort => 'Copied!';
+  @override
+  String get customLinks => 'Custom Links';
+  @override
+  String get customUrl => 'Custom URL';
+  @override
+  String get welcomeToReadmeCreator => 'Welcome to Readme Creator!';
+  @override
+  String get whatToBuild => 'What are you looking to build today?';
+  @override
+  String get projectReadme => 'Project README';
+  @override
+  String get softwareAndApps => 'Software & Apps';
+  @override
+  String get githubProfile => 'GitHub Profile';
+  @override
+  String get personalPortfolio => 'Personal Portfolio';
+  @override
+  String get projectIntelligence => 'Project Intelligence';
+  @override
+  String get personalBranding => 'Personal Branding';
+  @override
+  String get fillBasics => 'Fill in the basics to generate your template.';
+  @override
+  String get briefDescription => 'Brief Description';
+  @override
+  String get githubUsername => 'GitHub Username';
+  @override
+  String get professionalTitle => 'Professional Title';
+  @override
+  String get goBack => 'Go Back';
+  @override
+  String get skipSetup => 'Skip Setup';
+  @override
+  String get continueBtn => 'Continue';
+  @override
+  String get startCreating => 'Start Creating';
+  @override
+  String get addPublicTemplate => 'Add Public Template';
+  @override
+  String get templateName => 'Template Name';
+  @override
+  String get templateCategory => 'Category';
+  @override
+  String get templateContentJson => 'Template Content (JSON)';
+  @override
+  String get addTemplate => 'Add Template';
+  @override
+  String get templateAdded => 'Template added successfully';
+  @override
+  String get exportImage => 'Export Image';
+  @override
+  String get socialPreviewDesignerTitle => 'Social Preview Designer';
+  @override
+  String get localFolderTab => 'Local Folder';
+  @override
+  String get githubRepoTab => 'GitHub Repo';
+  @override
+  String get analyzeAndGenerate => 'Analyze & Generate';
+  @override
+  String get fetchAndGenerateBtn => 'Fetch & Generate';
+  @override
+  String get closeBtn => 'Close';
+  @override
+  String get cancelBtn => 'Cancel';
+  @override
+  String get deleteBtn => 'Delete';
+  @override
+  String get saveBtn => 'Save';
 }

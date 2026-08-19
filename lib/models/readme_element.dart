@@ -255,7 +255,7 @@ class ImageElement extends ReadmeElement {
   double? width;
   Uint8List? localData;
 
-  ImageElement({this.url = 'https://via.placeholder.com/150', this.altText = 'Image', this.width, this.localData, super.id}) : super(type: ReadmeElementType.image);
+  ImageElement({this.url = 'https://placehold.co/600x400/e2e8f0/475569?text=Your+Image', this.altText = 'Image', this.width, this.localData, super.id}) : super(type: ReadmeElementType.image);
 
   @override
   String get description => 'Image';

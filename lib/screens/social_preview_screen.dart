@@ -6,6 +6,7 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:file_picker/file_picker.dart';
+import '../l10n/app_localizations.dart';
 import '../providers/project_provider.dart';
 import '../utils/downloader.dart';
 import '../utils/toast_helper.dart';
@@ -137,14 +138,15 @@ class _SocialPreviewScreenState extends State<SocialPreviewScreen> {
   Widget build(BuildContext context) {
     final provider = Provider.of<ProjectProvider>(context);
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Social Preview Designer', style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
+        title: Text(l10n.socialPreviewDesignerTitle, style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
         actions: [
           FilledButton.icon(
             icon: const Icon(Icons.download),
-            label: const Text('Export Image'),
+            label: Text(l10n.exportImage),
             onPressed: _exportImage,
             style: FilledButton.styleFrom(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),

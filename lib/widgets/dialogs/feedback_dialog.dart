@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:desktop_drop/desktop_drop.dart';
 import 'package:pasteboard/pasteboard.dart';
+import '../../l10n/app_localizations.dart';
 import '../../core/constants/app_colors.dart';
 import '../../services/feedback_service.dart';
 import '../../utils/dialog_helper.dart';
@@ -99,13 +100,14 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context);
     
     return CallbackShortcuts(
       bindings: {
         const SingleActivator(LogicalKeyboardKey.keyV, control: true): _handlePaste,
         const SingleActivator(LogicalKeyboardKey.keyV, meta: true): _handlePaste,
       },
-      child: DropTarget(
+        child: DropTarget(
         onDragEntered: (details) => setState(() => _isDragging = true),
         onDragExited: (details) => setState(() => _isDragging = false),
         onDragDone: (details) async {
@@ -123,8 +125,8 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
           }
         },
         child: StyledDialog(
-          title: const DialogHeader(
-            title: 'Feedback & Support',
+          title: DialogHeader(
+            title: l10n.feedbackAndSupport,
             icon: Icons.support_agent_rounded,
             color: AppColors.primary,
           ),
@@ -142,10 +144,10 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 if (_isDragging) 
-                  Center(child: Text('Drop image here!', style: GoogleFonts.inter(fontWeight: FontWeight.bold, color: AppColors.primary))),
+                  Center(child: Text(l10n.dropImageHere, style: GoogleFonts.inter(fontWeight: FontWeight.bold, color: AppColors.primary))),
                 
                 Text(
-                  'How can we help you?',
+                  l10n.howCanWeHelp,
                   style: GoogleFonts.inter(fontWeight: FontWeight.bold, fontSize: 16),
                 ),
                 const SizedBox(height: 16),
@@ -157,7 +159,7 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
                   maxLines: 4,
                   autofocus: true,
                   decoration: InputDecoration(
-                    hintText: 'Describe your issue... (Ctrl+V to paste image)',
+                    hintText: l10n.describeIssueHint,
                     border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                     filled: true,
                     fillColor: isDark ? Colors.white.withAlpha(10) : Colors.grey.withAlpha(10),
@@ -169,13 +171,13 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
             ),
           ),
           actions: [
-            TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+            TextButton(onPressed: () => Navigator.pop(context), child: Text(l10n.cancelBtn)),
             FilledButton.icon(
               onPressed: _isSubmitting ? null : _submit,
               icon: _isSubmitting 
                   ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white))
                   : const Icon(Icons.send_rounded, size: 18),
-              label: Text(_isSubmitting ? 'Sending...' : 'Send Feedback'),
+              label: Text(_isSubmitting ? l10n.sending : l10n.sendFeedback),
             ),
           ],
         ),
@@ -213,6 +215,7 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
   }
 
   Widget _buildAttachmentSection(bool isDark) {
+    final l10n = AppLocalizations.of(context);
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
@@ -227,10 +230,10 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
             children: [
               Icon(Icons.attach_file_rounded, size: 16, color: Colors.grey[600]),
               const SizedBox(width: 8),
-              Text('Attachment (Drop or Paste)', style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.grey[600])),
+              Text(l10n.attachmentDropOrPaste, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.grey[600])),
               const Spacer(),
               if (_attachedFile == null)
-                TextButton.icon(onPressed: _pickFile, icon: const Icon(Icons.add_a_photo_rounded, size: 16), label: const Text('Add File', style: TextStyle(fontSize: 12)))
+                TextButton.icon(onPressed: _pickFile, icon: const Icon(Icons.add_a_photo_rounded, size: 16), label: Text(l10n.addFile, style: const TextStyle(fontSize: 12)))
               else
                 IconButton(icon: const Icon(Icons.close_rounded, size: 18, color: Colors.red), onPressed: () => setState(() => _attachedFile = null)),
             ],

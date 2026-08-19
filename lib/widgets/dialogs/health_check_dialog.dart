@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../l10n/app_localizations.dart';
 import '../../providers/project_provider.dart';
 import '../../services/health_check_service.dart';
 import '../../services/ai_service.dart';
@@ -54,10 +55,11 @@ class _HealthCheckDialogState extends State<HealthCheckDialog> {
   Widget build(BuildContext context) {
     final score = HealthCheckService.calculateDocumentationScore(widget.provider.elements);
     final hasAI = widget.provider.geminiApiKey.trim().isNotEmpty;
+    final l10n = AppLocalizations.of(context);
 
     return StyledDialog(
-      title: const DialogHeader(
-        title: 'Project Health Center',
+      title: DialogHeader(
+        title: l10n.projectHealthCenter,
         icon: Icons.health_and_safety_rounded,
         color: AppColors.primary,
       ),
@@ -73,7 +75,7 @@ class _HealthCheckDialogState extends State<HealthCheckDialog> {
               _buildAIInsightsCard(),
               const SizedBox(height: 24),
             ],
-            _buildSectionTitle('STRUCTURAL AUDIT'),
+            _buildSectionTitle(l10n.structuralAudit),
             const SizedBox(height: 12),
             if (widget.issues.isEmpty) 
               _buildCleanState() 
@@ -85,7 +87,7 @@ class _HealthCheckDialogState extends State<HealthCheckDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: Text('Close', style: GoogleFonts.inter(fontWeight: FontWeight.bold)),
+          child: Text(l10n.closeBtn, style: GoogleFonts.inter(fontWeight: FontWeight.bold)),
         ),
       ],
     );
@@ -93,6 +95,7 @@ class _HealthCheckDialogState extends State<HealthCheckDialog> {
 
   Widget _buildScoreHeader(double score) {
     final color = score > 80 ? Colors.green : (score > 50 ? Colors.orange : Colors.redAccent);
+    final l10n = AppLocalizations.of(context);
     return GlassCard(
       opacity: 0.1,
       color: color,
@@ -114,8 +117,8 @@ class _HealthCheckDialogState extends State<HealthCheckDialog> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(score > 80 ? 'Elite Documentation' : 'Optimization Required', style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 17)),
-                Text('Score based on GitHub quality standards.', style: GoogleFonts.inter(fontSize: 12, color: Colors.grey)),
+                Text(score > 80 ? l10n.eliteDocumentation : l10n.optimizationRequired, style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 17)),
+                Text(l10n.scoreBasedOnGitHub, style: GoogleFonts.inter(fontSize: 12, color: Colors.grey)),
               ],
             ),
           ),
@@ -125,6 +128,7 @@ class _HealthCheckDialogState extends State<HealthCheckDialog> {
   }
 
   Widget _buildAIInsightsCard() {
+    final l10n = AppLocalizations.of(context);
     return GlassCard(
       opacity: 0.1,
       color: Colors.purple,
@@ -136,7 +140,7 @@ class _HealthCheckDialogState extends State<HealthCheckDialog> {
             children: [
               const Icon(Icons.psychology_rounded, color: Colors.purpleAccent, size: 22),
               const SizedBox(width: 10),
-              Text('AI STRATEGIC AUDIT', style: GoogleFonts.poppins(fontWeight: FontWeight.w900, color: Colors.purpleAccent, fontSize: 12, letterSpacing: 1.2)),
+              Text(l10n.aiStrategicAudit, style: GoogleFonts.poppins(fontWeight: FontWeight.w900, color: Colors.purpleAccent, fontSize: 12, letterSpacing: 1.2)),
               const Spacer(),
               if (_isAnalyzingAI) const SizedBox(width: 14, height: 14, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.purpleAccent)),
             ],
@@ -145,7 +149,7 @@ class _HealthCheckDialogState extends State<HealthCheckDialog> {
           if (_aiFeedback != null)
             Text(_aiFeedback!, style: GoogleFonts.inter(fontSize: 14, color: Colors.grey, height: 1.6))
           else if (!_isAnalyzingAI)
-            const Text('AI analysis failed or took too long.', style: TextStyle(color: Colors.grey, fontSize: 13)),
+            Text(l10n.aiAnalysisFailed, style: const TextStyle(color: Colors.grey, fontSize: 13)),
         ],
       ),
     );
@@ -169,14 +173,15 @@ class _HealthCheckDialogState extends State<HealthCheckDialog> {
   }
 
   Widget _buildCleanState() {
-    return const Center(
+    final l10n = AppLocalizations.of(context);
+    return Center(
       child: Padding(
-        padding: EdgeInsets.all(40.0),
+        padding: const EdgeInsets.all(40.0),
         child: Column(
           children: [
-            Icon(Icons.check_circle_rounded, size: 48, color: Colors.green),
-            SizedBox(height: 16),
-            Text('All structural checks passed!', style: TextStyle(fontWeight: FontWeight.bold)),
+            const Icon(Icons.check_circle_rounded, size: 48, color: Colors.green),
+            const SizedBox(height: 16),
+            Text(l10n.allChecksPassed, style: const TextStyle(fontWeight: FontWeight.bold)),
           ],
         ),
       ),

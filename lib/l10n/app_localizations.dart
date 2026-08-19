@@ -2153,6 +2153,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Use This Gist'**
   String get useThisGist;
+
+  String get projectHealthCenter;
+  String get eliteDocumentation;
+  String get optimizationRequired;
+  String get scoreBasedOnGitHub;
+  String get aiStrategicAudit;
+  String get aiAnalysisFailed;
+  String get structuralAudit;
+  String get allChecksPassed;
+  String get feedbackAndSupport;
+  String get howCanWeHelp;
+  String get describeIssueHint;
+  String get sendFeedback;
+  String get sending;
+  String get dropImageHere;
+  String get attachmentDropOrPaste;
+  String get addFile;
+  String get fundingYamlPreview;
+  String get copyYaml;
+  String get copiedToClipboardShort;
+  String get customLinks;
+  String get customUrl;
+  String get welcomeToReadmeCreator;
+  String get whatToBuild;
+  String get projectReadme;
+  String get softwareAndApps;
+  String get githubProfile;
+  String get personalPortfolio;
+  String get projectIntelligence;
+  String get personalBranding;
+  String get fillBasics;
+  String get briefDescription;
+  String get githubUsername;
+  String get professionalTitle;
+  String get goBack;
+  String get skipSetup;
+  String get continueBtn;
+  String get startCreating;
+  String get addPublicTemplate;
+  String get templateName;
+  String get templateCategory;
+  String get templateContentJson;
+  String get addTemplate;
+  String get templateAdded;
+  String get exportImage;
+  String get socialPreviewDesignerTitle;
+  String get localFolderTab;
+  String get githubRepoTab;
+  String get analyzeAndGenerate;
+  String get fetchAndGenerateBtn;
+  String get closeBtn;
+  String get cancelBtn;
+  String get deleteBtn;
+  String get saveBtn;
 }
 
 class _AppLocalizationsDelegate

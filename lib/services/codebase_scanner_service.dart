@@ -88,11 +88,18 @@ class CodebaseScannerService {
   }
 
   static bool _isBinary(String filePath) {
-    // Simple extension check is usually enough for this context,
-    // but we already checked extensions in _shouldIgnore.
-    // We could try to read the first few bytes to check for null bytes,
-    // but readAsString throwing exception handles most cases.
-    return false;
+    final ext = path.extension(filePath).toLowerCase();
+    const binaryExtensions = [
+      '.png', '.jpg', '.jpeg', '.gif', '.ico', '.svg', '.webp', '.bmp', '.tiff',
+      '.mp4', '.mov', '.avi', '.mkv', '.flv', '.wmv',
+      '.mp3', '.wav', '.flac', '.aac', '.ogg',
+      '.pdf', '.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx',
+      '.zip', '.tar', '.gz', '.rar', '.7z',
+      '.exe', '.dll', '.so', '.dylib',
+      '.woff', '.woff2', '.ttf', '.eot',
+      '.sqlite', '.db',
+    ];
+    return binaryExtensions.contains(ext);
   }
 }
 

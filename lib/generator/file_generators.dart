@@ -111,17 +111,62 @@ Enhancement suggestions are tracked as [GitHub issues](https://github.com/${vari
 - **Explain why this enhancement would be useful** to most $projectName users. You may also want to point out the other projects that solved it better and which could serve as inspiration.
 
 ### Your First Code Contribution
-<!-- TODO: include a link to the specific documentation for setting up the environment -->
+
+Unsure where to start contributing to $projectName? You can start by looking through these beginner tasks:
+
+- Look through our [good first issues](https://github.com/${variables['GITHUB_USERNAME']}/$projectName/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) for a list of tasks that have a limited scope.
+- Set up your local development environment:
+
+  1. Fork the repository
+  2. Clone your fork: \`git clone https://github.com/${variables['GITHUB_USERNAME']}/$projectName.git\`
+  3. Create a branch: \`git checkout -b my-feature\`
+  4. Make your changes and test them
+  5. Commit: \`git commit -m "Add my feature"\`
+  6. Push: \`git push origin my-feature\`
+  7. Open a Pull Request
 
 ### Improving The Documentation
-<!-- TODO: include a link to the specific documentation for improving the documentation -->
+
+Improvements to the documentation are always welcome! Here's how you can help:
+
+- Fix typos or grammatical errors in existing documentation
+- Add examples or usage instructions where they are missing
+- Improve the API documentation with better descriptions
+- Translate documentation into other languages
+- Add screenshots or diagrams to clarify complex concepts
+
+To contribute to documentation, follow the same workflow as code contributions: fork, edit, and submit a Pull Request.
 
 ## Styleguides
 ### Commit Messages
-<!-- TODO: include a link to the specific documentation for commit messages -->
+
+- Use the present tense ("Add feature" not "Added feature")
+- Use the imperative mood ("Move cursor to..." not "Moves cursor to...")
+- Keep the first line to 72 characters or less
+- Reference issues and pull requests liberally after the first line
+- Consider starting the commit message with an applicable emoji:
+  - 🎨 \`feat:\` A new feature
+  - 🐛 \`fix:\` A bug fix
+  - 📝 \`docs:\` Documentation only changes
+  - ♻️ \`refactor:\` A code change that neither fixes a bug nor adds a feature
+  - ✅ \`test:\` Adding missing tests or correcting existing tests
+  - 🔧 \`chore:\` Other changes that don't modify src or test files
 
 ## Join The Project Team
-<!-- TODO: include a link to the specific documentation for joining the project team -->
+
+Interested in becoming a core contributor? Here's how:
+
+1. Start by contributing to the project through issues and pull requests
+2. Demonstrate consistent, quality contributions
+3. Show understanding of the project's goals and architecture
+4. Be respectful and helpful in discussions
+5. Once you've built a track record, a maintainer will invite you to join the team
+
+We value contributors who are:
+- Reliable and consistent
+- Good communicators
+- Respectful of the code of conduct
+- Passionate about improving documentation tools
 ''';
   }
 
@@ -440,7 +485,7 @@ SOFTWARE.
    limitations under the License.
 ''';
       default:
-        return 'License type not supported yet.';
+        return 'License type not yet supported. Consider using MIT, Apache 2.0, GPLv3, BSD 3-Clause, Unlicense, or MPL-2.0.';
     }
   }
 

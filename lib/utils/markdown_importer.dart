@@ -10,18 +10,20 @@ class MarkdownImporter {
       encodeHtml: false,
     );
 
-    // Pre-process to extract comments like <!-- TOC -->
-    if (markdown.contains('<!-- TOC -->')) {
-      // We can't easily inject this into the AST stream as a node.
-      // But we can check for it later or handle it if we parse block by block.
-      // The markdown parser ignores comments.
-      // Let's split by TOC if present? No, that's messy.
-      // Let's just check if we can find it in the raw text and insert a placeholder element?
-      // Or better, if we encounter a specific pattern.
-      // For now, let's stick to AST.
+    // Pre-process to extract <!-- TOC --> comments
+    final lines = markdown.split('\n');
+    final processedLines = <String>[];
+    bool hasToc = false;
+    for (final line in lines) {
+      if (line.trim() == '<!-- TOC -->') {
+        hasToc = true;
+        processedLines.add('');
+      } else {
+        processedLines.add(line);
+      }
     }
 
-    final nodes = document.parseLines(markdown.split('\n'));
+    final nodes = document.parseLines(processedLines);
 
     for (final node in nodes) {
       if (node is md.Element) {
@@ -31,6 +33,10 @@ class MarkdownImporter {
           elements.add(ParagraphElement(text: node.text));
         }
       }
+    }
+
+    if (hasToc) {
+      elements.insert(0, TOCElement());
     }
 
     return _postProcessElements(elements);

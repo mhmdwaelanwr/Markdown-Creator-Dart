@@ -52,7 +52,7 @@ class Templates {
             GitHubStatsElement(repoName: '[GITHUB_USERNAME]/[PROJECT_NAME]', showStars: true, showForks: true, showIssues: true, showLicense: true),
             ParagraphElement(text: 'A complete solution for...'),
             HeadingElement(text: 'Screenshots', level: 2),
-            ParagraphElement(text: '![App Screenshot](https://via.placeholder.com/800x400)'),
+            ParagraphElement(text: '![App Screenshot](https://placehold.co/800x400/e2e8f0/475569?text=App+Screenshot)'),
             HeadingElement(text: 'Features', level: 2),
             ListElement(items: ['Feature A', 'Feature B', 'Feature C']),
             HeadingElement(text: 'Tech Stack', level: 2),
