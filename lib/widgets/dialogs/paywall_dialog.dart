@@ -14,7 +14,6 @@ class PaywallDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final subService = Provider.of<SubscriptionService>(context);
     final isPro = subService.isPro;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return StyledDialog(
       title: const DialogHeader(

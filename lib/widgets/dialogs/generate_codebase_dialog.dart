@@ -9,7 +9,6 @@ import '../../services/codebase_scanner_service.dart';
 import '../../services/github_scanner_service.dart';
 import '../../utils/toast_helper.dart';
 import '../../utils/dialog_helper.dart';
-import '../../core/constants/app_colors.dart';
 
 class GenerateCodebaseDialog extends StatefulWidget {
   const GenerateCodebaseDialog({super.key});

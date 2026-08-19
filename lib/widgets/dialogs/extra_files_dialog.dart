@@ -6,7 +6,6 @@ import '../../providers/project_provider.dart';
 import '../../utils/downloader.dart';
 import '../../utils/toast_helper.dart';
 import '../../generator/file_generators.dart';
-import '../../core/constants/app_colors.dart';
 
 class ExtraFilesDialog extends StatelessWidget {
   const ExtraFilesDialog({super.key});

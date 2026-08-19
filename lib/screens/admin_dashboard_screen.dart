@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../services/firestore_service.dart';
-import '../services/auth_service.dart';
 import '../core/constants/app_colors.dart';
 import '../utils/toast_helper.dart';
 
@@ -16,7 +15,6 @@ class AdminDashboardScreen extends StatefulWidget {
 
 class _AdminDashboardScreenState extends State<AdminDashboardScreen> with SingleTickerProviderStateMixin {
   final FirestoreService _firestoreService = FirestoreService();
-  final AuthService _authService = AuthService();
   late TabController _tabController;
   final TextEditingController _searchController = TextEditingController();
   
@@ -503,7 +501,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> with Single
         Text(label, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.grey)),
         const SizedBox(height: 8),
         DropdownButtonFormField<String>(
-          value: current,
+          initialValue: current,
           items: options.map((o) => DropdownMenuItem(value: o, child: Text(o.toUpperCase(), style: const TextStyle(fontSize: 13)))).toList(),
           onChanged: onChanged,
           decoration: InputDecoration(
@@ -666,7 +664,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> with Single
                     elevation: 0,
                     color: isDark ? const Color(0xFF161922) : Colors.white,
                     margin: const EdgeInsets.only(bottom: 12),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16), border: Border.all(color: Colors.grey.withAlpha(20))),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16), side: Border.all(color: Colors.grey.withAlpha(20))),
                     child: ListTile(
                       contentPadding: const EdgeInsets.all(12),
                       leading: CircleAvatar(
@@ -681,7 +679,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> with Single
                           const Text('PRO', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
                           Switch(
                             value: isPro,
-                            activeColor: Colors.amber,
+                            activeThumbColor: Colors.amber,
                             onChanged: (val) => _togglePro(user.id, val),
                           ),
                         ],
@@ -716,7 +714,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> with Single
               elevation: 0,
               color: isDark ? const Color(0xFF161922) : Colors.white,
               margin: const EdgeInsets.only(bottom: 16),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20), border: Border.all(color: Colors.grey.withAlpha(20))),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20), side: Border.all(color: Colors.grey.withAlpha(20))),
               child: ExpansionTile(
                 iconColor: AppColors.primary,
                 leading: _getTypeIcon(type),

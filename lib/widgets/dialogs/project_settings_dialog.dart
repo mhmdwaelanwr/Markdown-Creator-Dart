@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../l10n/app_localizations.dart';
 import '../../providers/project_provider.dart';
 import '../../utils/debouncer.dart';
 import '../../utils/dialog_helper.dart';
-import '../../core/constants/app_colors.dart';
 import 'confirm_dialog.dart';
 
 class ProjectSettingsDialog extends StatefulWidget {
@@ -137,7 +135,7 @@ class _ProjectSettingsDialogState extends State<ProjectSettingsDialog> {
             child: Column(
               children: [
                 DropdownButtonFormField<String>(
-                  value: provider.licenseType,
+                  initialValue: provider.licenseType,
                   decoration: InputDecoration(
                     labelText: l10n.selectLicense,
                     border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),

@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import '../../l10n/app_localizations.dart';
 import '../../providers/project_provider.dart';
 import '../../utils/dialog_helper.dart';
-import '../../core/constants/app_colors.dart';
 import 'confirm_dialog.dart';
 
 class SnapshotsDialog extends StatelessWidget {

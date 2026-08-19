@@ -6,7 +6,6 @@ import '../../l10n/app_localizations.dart';
 import '../../providers/project_provider.dart';
 import '../../utils/dialog_helper.dart';
 import '../../utils/toast_helper.dart';
-import '../../core/constants/app_colors.dart';
 
 class AISettingsDialog extends StatefulWidget {
   const AISettingsDialog({super.key});

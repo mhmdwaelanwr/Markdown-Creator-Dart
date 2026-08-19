@@ -17,7 +17,6 @@ linter:
 
     # Style rules
     always_declare_return_types: true
-    always_require_non_null_named_parameters: true
     annotate_overrides: true
     avoid_init_to_null: true
     avoid_return_types_on_setters: true
@@ -49,7 +48,6 @@ linter:
     prefer_const_declarations: true
     prefer_const_literals_to_create_immutables: true
     prefer_contains: true
-    prefer_equal_for_default_values: true
     prefer_final_fields: true
     prefer_for_elements_to_map_fromIterable: true
     prefer_function_declarations_over_variables: true

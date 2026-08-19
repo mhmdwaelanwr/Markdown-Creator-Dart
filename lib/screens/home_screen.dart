@@ -1,10 +1,7 @@
 import 'dart:convert';
 import 'dart:ui';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:markdown_creator/l10n/app_localizations.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -25,24 +22,18 @@ import '../services/preferences_service.dart';
 import '../utils/templates.dart';
 import '../utils/project_exporter.dart';
 import '../utils/downloader.dart';
-import '../utils/onboarding_helper.dart';
 import 'projects_library_screen.dart';
 import 'social_preview_screen.dart';
 import 'github_actions_generator.dart';
 import '../services/health_check_service.dart';
 import '../services/auth_service.dart';
-import '../services/ai_service.dart';
 import '../services/subscription_service.dart';
-import '../core/constants/app_colors.dart';
 
 import '../utils/toast_helper.dart';
 import '../widgets/developer_info_dialog.dart';
 import '../utils/dialog_helper.dart';
 
-import 'onboarding_screen.dart';
 import 'gallery_screen.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import '../widgets/element_renderer.dart';
 import 'funding_generator_screen.dart';
 import '../generator/markdown_generator.dart';
 import '../widgets/dialogs/project_settings_dialog.dart';

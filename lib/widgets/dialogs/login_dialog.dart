@@ -270,7 +270,7 @@ class _LoginDialogState extends State<LoginDialog> with SingleTickerProviderStat
                 icon: const Icon(Icons.send_rounded, size: 18),
                 onPressed: () {
                   if (_phoneController.text.isEmpty) return;
-                  final fullNumber = '+${_selectedCountryCode}${_phoneController.text}';
+                  final fullNumber = '+$_selectedCountryCode${_phoneController.text}';
                   _authService.verifyPhoneNumber(
                     phoneNumber: fullNumber,
                     verificationCompleted: (cred) => _handleSignIn(() => _authService.signInWithPhoneCredential(cred.verificationId!, cred.smsCode!), 'Phone'),

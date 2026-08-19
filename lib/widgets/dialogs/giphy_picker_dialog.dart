@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../services/giphy_service.dart';
 import '../../utils/dialog_helper.dart';
-import '../../core/constants/app_colors.dart';
 
 class GiphyPickerDialog extends StatefulWidget {
   const GiphyPickerDialog({super.key});

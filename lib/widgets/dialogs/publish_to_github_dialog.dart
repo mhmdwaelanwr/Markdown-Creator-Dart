@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
 import '../../providers/project_provider.dart';
 import '../../services/github_publisher_service.dart';
 import '../../generator/markdown_generator.dart';
 import '../../utils/dialog_helper.dart';
 import '../../utils/toast_helper.dart';
-import '../../core/constants/app_colors.dart';
 import 'confirm_dialog.dart';
 
 class PublishToGitHubDialog extends StatefulWidget {

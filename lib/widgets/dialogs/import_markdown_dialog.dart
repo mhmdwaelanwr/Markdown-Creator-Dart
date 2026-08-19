@@ -7,7 +7,6 @@ import '../../providers/project_provider.dart';
 import '../../services/auth_service.dart';
 import '../../utils/dialog_helper.dart';
 import '../../utils/toast_helper.dart';
-import '../../core/constants/app_colors.dart';
 import 'login_dialog.dart';
 
 class ImportMarkdownDialog extends StatefulWidget {

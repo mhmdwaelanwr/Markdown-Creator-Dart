@@ -42,7 +42,7 @@ class GitHubPublisherService {
 
     // 3. Create a new branch
     final createBranchUrl = Uri.parse('https://api.github.com/repos/$owner/$repo/git/refs');
-    final createBranchResponse = await http.post(
+    await http.post(
       createBranchUrl,
       headers: headers,
       body: jsonEncode({
