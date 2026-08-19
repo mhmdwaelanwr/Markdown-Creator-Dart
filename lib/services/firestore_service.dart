@@ -90,6 +90,21 @@ class FirestoreService {
     });
   }
 
+  Future<void> updateTemplate({
+    required String id,
+    required String name,
+    required String description,
+    required String category,
+  }) async {
+    final db = _db;
+    if (db == null) return;
+    await db.collection('public_templates').doc(id).update({
+      'name': name,
+      'description': description,
+      'category': category,
+    });
+  }
+
   // --- Personal Collections ---
   DocumentReference? get _userDoc {
     final auth = _auth;

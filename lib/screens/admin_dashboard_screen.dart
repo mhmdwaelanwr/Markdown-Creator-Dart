@@ -807,7 +807,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> with Single
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                IconButton(onPressed: () {}, icon: const Icon(Icons.edit_outlined, size: 18)),
+                                IconButton(onPressed: () => _showEditTemplateDialog(t), icon: const Icon(Icons.edit_outlined, size: 18)),
                                 IconButton(onPressed: () => _firestoreService.deleteTemplate(t['id']), icon: const Icon(Icons.delete_outline, size: 18, color: Colors.red)),
                               ],
                             )
@@ -891,6 +891,68 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> with Single
                 }
               },
               child: const Text('Add Template'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showEditTemplateDialog(Map<String, dynamic> template) {
+    final nameController = TextEditingController(text: template['name'] ?? '');
+    final descController = TextEditingController(text: template['description'] ?? '');
+    String selectedCategory = template['category'] ?? 'General';
+
+    showDialog(
+      context: context,
+      builder: (ctx) => StatefulBuilder(
+        builder: (ctx, setDialogState) => AlertDialog(
+          title: Text('Edit Template', style: GoogleFonts.inter(fontWeight: FontWeight.bold)),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: nameController,
+                  decoration: const InputDecoration(labelText: 'Template Name', border: OutlineInputBorder()),
+                ),
+                const SizedBox(height: 12),
+                TextField(
+                  controller: descController,
+                  decoration: const InputDecoration(labelText: 'Description', border: OutlineInputBorder()),
+                  maxLines: 2,
+                ),
+                const SizedBox(height: 12),
+                DropdownButtonFormField<String>(
+                  initialValue: selectedCategory,
+                  decoration: const InputDecoration(labelText: 'Category', border: OutlineInputBorder()),
+                  items: ['General', 'Portfolio', 'API', 'Library', 'Mobile', 'Web'].map((c) {
+                    return DropdownMenuItem(value: c, child: Text(c));
+                  }).toList(),
+                  onChanged: (val) {
+                    if (val != null) setDialogState(() => selectedCategory = val);
+                  },
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
+            FilledButton(
+              onPressed: () async {
+                if (nameController.text.isEmpty) return;
+                await _firestoreService.updateTemplate(
+                  id: template['id'],
+                  name: nameController.text,
+                  description: descController.text,
+                  category: selectedCategory,
+                );
+                if (mounted) {
+                  Navigator.pop(ctx);
+                  ToastHelper.show(context, 'Template updated');
+                }
+              },
+              child: const Text('Save Changes'),
             ),
           ],
         ),
