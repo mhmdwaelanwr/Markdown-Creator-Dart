@@ -55,7 +55,7 @@ class _HealthCheckDialogState extends State<HealthCheckDialog> {
   Widget build(BuildContext context) {
     final score = HealthCheckService.calculateDocumentationScore(widget.provider.elements);
     final hasAI = widget.provider.geminiApiKey.trim().isNotEmpty;
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return StyledDialog(
       title: DialogHeader(
@@ -95,7 +95,7 @@ class _HealthCheckDialogState extends State<HealthCheckDialog> {
 
   Widget _buildScoreHeader(double score) {
     final color = score > 80 ? Colors.green : (score > 50 ? Colors.orange : Colors.redAccent);
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!;
     return GlassCard(
       opacity: 0.1,
       color: color,
@@ -128,7 +128,7 @@ class _HealthCheckDialogState extends State<HealthCheckDialog> {
   }
 
   Widget _buildAIInsightsCard() {
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!;
     return GlassCard(
       opacity: 0.1,
       color: Colors.purple,
@@ -173,7 +173,7 @@ class _HealthCheckDialogState extends State<HealthCheckDialog> {
   }
 
   Widget _buildCleanState() {
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!;
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(40.0),

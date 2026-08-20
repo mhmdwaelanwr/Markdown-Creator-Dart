@@ -53,7 +53,7 @@ class NotificationService {
     });
 
     // Get the token for individual targeting (optional)
-    String? token = await _messaging.getToken();
+    await _messaging.getToken();
     // Token stored securely, not logged in production
     
     // Subscribe to a general topic

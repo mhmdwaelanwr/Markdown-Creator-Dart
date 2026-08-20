@@ -664,7 +664,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> with Single
                     elevation: 0,
                     color: isDark ? const Color(0xFF161922) : Colors.white,
                     margin: const EdgeInsets.only(bottom: 12),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16), side: Border.all(color: Colors.grey.withAlpha(20))),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16), side: BorderSide(color: Colors.grey.withAlpha(20))),
                     child: ListTile(
                       contentPadding: const EdgeInsets.all(12),
                       leading: CircleAvatar(
@@ -714,7 +714,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> with Single
               elevation: 0,
               color: isDark ? const Color(0xFF161922) : Colors.white,
               margin: const EdgeInsets.only(bottom: 16),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20), side: Border.all(color: Colors.grey.withAlpha(20))),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20), side: BorderSide(color: Colors.grey.withAlpha(20))),
               child: ExpansionTile(
                 iconColor: AppColors.primary,
                 leading: _getTypeIcon(type),

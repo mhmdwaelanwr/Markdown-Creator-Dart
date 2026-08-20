@@ -1602,7 +1602,7 @@ class _ElementSettingsFormState extends State<ElementSettingsForm> {
           decoration: const InputDecoration(labelText: 'Badge Style', border: OutlineInputBorder()),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<String>(
-            initialValue: element.style,
+            value: element.style,
               isDense: true,
               items: [
                 DropdownMenuItem(value: 'for-the-badge', child: Text('For The Badge', style: GoogleFonts.inter())),

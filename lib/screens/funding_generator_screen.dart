@@ -72,7 +72,7 @@ class _FundingGeneratorScreenState extends State<FundingGeneratorScreen> {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final code = _generateYaml();
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(

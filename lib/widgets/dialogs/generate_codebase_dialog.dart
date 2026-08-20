@@ -110,6 +110,7 @@ class _GenerateCodebaseDialogState extends State<GenerateCodebaseDialog> with Si
   }
 
   Widget _buildLocalFolderTab(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -155,6 +156,7 @@ class _GenerateCodebaseDialogState extends State<GenerateCodebaseDialog> with Si
   }
 
   Widget _buildGitHubRepoTab(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [

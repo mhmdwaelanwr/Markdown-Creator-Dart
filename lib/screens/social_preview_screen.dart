@@ -138,7 +138,7 @@ class _SocialPreviewScreenState extends State<SocialPreviewScreen> {
   Widget build(BuildContext context) {
     final provider = Provider.of<ProjectProvider>(context);
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(

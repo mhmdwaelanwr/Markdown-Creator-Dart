@@ -13,12 +13,10 @@ import 'package:markdown/markdown.dart' as md;
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import '../models/readme_element.dart';
 import '../widgets/components_panel.dart';
 import '../widgets/editor_canvas.dart';
 import '../widgets/settings_panel.dart';
 import '../providers/project_provider.dart';
-import '../services/preferences_service.dart';
 import '../utils/templates.dart';
 import '../utils/project_exporter.dart';
 import '../utils/downloader.dart';
@@ -28,6 +26,8 @@ import 'github_actions_generator.dart';
 import '../services/health_check_service.dart';
 import '../services/auth_service.dart';
 import '../services/subscription_service.dart';
+import '../core/constants/app_colors.dart';
+import 'package:flutter/foundation.dart';
 
 import '../utils/toast_helper.dart';
 import '../widgets/developer_info_dialog.dart';

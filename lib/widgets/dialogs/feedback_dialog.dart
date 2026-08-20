@@ -100,7 +100,7 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!;
     
     return CallbackShortcuts(
       bindings: {
@@ -215,7 +215,7 @@ class _FeedbackDialogState extends State<FeedbackDialog> {
   }
 
   Widget _buildAttachmentSection(bool isDark) {
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(

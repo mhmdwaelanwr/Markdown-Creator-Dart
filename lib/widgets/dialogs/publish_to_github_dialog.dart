@@ -6,6 +6,7 @@ import '../../services/github_publisher_service.dart';
 import '../../generator/markdown_generator.dart';
 import '../../utils/dialog_helper.dart';
 import '../../utils/toast_helper.dart';
+import '../../l10n/app_localizations.dart';
 import 'confirm_dialog.dart';
 
 class PublishToGitHubDialog extends StatefulWidget {
@@ -131,7 +132,7 @@ class _PublishToGitHubDialogState extends State<PublishToGitHubDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: Text(AppLocalizations.of(context).cancelBtn, style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
+          child: Text(AppLocalizations.of(context)!.cancelBtn, style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
         ),
         _buildPublishButton(),
       ],

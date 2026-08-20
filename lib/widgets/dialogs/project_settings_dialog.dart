@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../l10n/app_localizations.dart';
 import '../../providers/project_provider.dart';
+import '../../core/constants/app_colors.dart';
 import '../../utils/debouncer.dart';
 import '../../utils/dialog_helper.dart';
 import 'confirm_dialog.dart';

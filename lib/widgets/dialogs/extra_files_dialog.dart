@@ -113,7 +113,7 @@ class ExtraFilesDialog extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: Text(AppLocalizations.of(context).closeBtn, style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
+          child: Text(AppLocalizations.of(context)!.closeBtn, style: GoogleFonts.inter(fontWeight: FontWeight.w600)),
         ),
       ],
     );

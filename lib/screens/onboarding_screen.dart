@@ -158,7 +158,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Widget _buildStep1() {
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       key: const ValueKey(0),
       mainAxisAlignment: MainAxisAlignment.center,
@@ -238,7 +238,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Widget _buildStep2() {
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       key: const ValueKey(1),
       mainAxisAlignment: MainAxisAlignment.center,
@@ -281,7 +281,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Widget _buildBottomActions(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.all(32.0),
       child: Row(
