@@ -16,7 +16,6 @@ class FirestoreService {
   FirebaseFirestore? get _db => isReady ? FirebaseFirestore.instance : null;
   FirebaseAuth? get _auth => isReady ? FirebaseAuth.instance : null;
 
-  // --- App Configuration (Admin) ---
   Stream<DocumentSnapshot> getAppConfig() {
     final db = _db;
     if (db == null) return const Stream.empty();
@@ -26,21 +25,26 @@ class FirestoreService {
   Future<void> updateAppConfig(Map<String, dynamic> data) async {
     final db = _db;
     if (db == null) return;
-    await db.collection('settings').doc('app_config').set(data, SetOptions(merge: true));
+    try {
+      await db.collection('settings').doc('app_config').set(data, SetOptions(merge: true));
+    } catch (e) {
+      print('Error updating app config: $e');
+    }
   }
 
-  // --- User Management (Admin) ---
   Future<void> updateUserStatus(String uid, Map<String, dynamic> updates) async {
     final db = _db;
     if (db == null) return;
-    await db.collection('users').doc(uid).update(updates);
+    try {
+      await db.collection('users').doc(uid).update(updates);
+    } catch (e) {
+      print('Error updating user status: $e');
+    }
   }
 
-  // --- Templates (Admin & Public) ---
   Stream<List<Map<String, dynamic>>> getPublicTemplates() {
     final db = _db;
     if (db == null) return Stream.value([]);
-    
     return db.collection('public_templates').snapshots().map((snapshot) {
       return snapshot.docs.map((doc) {
         var data = doc.data();
@@ -58,19 +62,27 @@ class FirestoreService {
   }) async {
     final db = _db;
     if (db == null) return;
-    await db.collection('public_templates').add({
-      'name': name,
-      'description': description,
-      'elements': elements,
-      'category': category ?? 'General',
-      'createdAt': FieldValue.serverTimestamp(),
-    });
+    try {
+      await db.collection('public_templates').add({
+        'name': name,
+        'description': description,
+        'elements': elements,
+        'category': category ?? 'General',
+        'createdAt': FieldValue.serverTimestamp(),
+      });
+    } catch (e) {
+      print('Error saving template: $e');
+    }
   }
 
   Future<void> deleteTemplate(String id) async {
     final db = _db;
     if (db == null) return;
-    await db.collection('public_templates').doc(id).delete();
+    try {
+      await db.collection('public_templates').doc(id).delete();
+    } catch (e) {
+      print('Error deleting template: $e');
+    }
   }
 
   Future<void> addPublicTemplate({
@@ -81,13 +93,17 @@ class FirestoreService {
   }) async {
     final db = _db;
     if (db == null) return;
-    await db.collection('public_templates').add({
-      'name': name,
-      'description': description,
-      'category': category,
-      'content': content,
-      'createdAt': FieldValue.serverTimestamp(),
-    });
+    try {
+      await db.collection('public_templates').add({
+        'name': name,
+        'description': description,
+        'category': category,
+        'content': content,
+        'createdAt': FieldValue.serverTimestamp(),
+      });
+    } catch (e) {
+      print('Error adding template: $e');
+    }
   }
 
   Future<void> updateTemplate({
@@ -98,14 +114,17 @@ class FirestoreService {
   }) async {
     final db = _db;
     if (db == null) return;
-    await db.collection('public_templates').doc(id).update({
-      'name': name,
-      'description': description,
-      'category': category,
-    });
+    try {
+      await db.collection('public_templates').doc(id).update({
+        'name': name,
+        'description': description,
+        'category': category,
+      });
+    } catch (e) {
+      print('Error updating template: $e');
+    }
   }
 
-  // --- Personal Collections ---
   DocumentReference? get _userDoc {
     final auth = _auth;
     final db = _db;
@@ -116,13 +135,16 @@ class FirestoreService {
   Future<void> saveProject(SavedProject project) async {
     final userDoc = _userDoc;
     if (userDoc == null) return;
-    await userDoc.collection('projects').doc(project.id).set(project.toJson());
+    try {
+      await userDoc.collection('projects').doc(project.id).set(project.toJson());
+    } catch (e) {
+      print('Error saving project: $e');
+    }
   }
 
   Stream<List<SavedProject>> getProjects() {
     final userDoc = _userDoc;
     if (userDoc == null) return Stream.value([]);
-    
     return userDoc.collection('projects')
         .orderBy('lastModified', descending: true)
         .snapshots()
@@ -134,19 +156,26 @@ class FirestoreService {
   Future<void> deleteProject(String id) async {
     final userDoc = _userDoc;
     if (userDoc == null) return;
-    await userDoc.collection('projects').doc(id).delete();
+    try {
+      await userDoc.collection('projects').doc(id).delete();
+    } catch (e) {
+      print('Error deleting project: $e');
+    }
   }
 
   Future<void> saveSnippet(Snippet snippet) async {
     final userDoc = _userDoc;
     if (userDoc == null) return;
-    await userDoc.collection('snippets').doc(snippet.id).set(snippet.toJson());
+    try {
+      await userDoc.collection('snippets').doc(snippet.id).set(snippet.toJson());
+    } catch (e) {
+      print('Error saving snippet: $e');
+    }
   }
 
   Stream<List<Snippet>> getSnippets() {
     final userDoc = _userDoc;
     if (userDoc == null) return Stream.value([]);
-    
     return userDoc.collection('snippets').snapshots().map((snapshot) {
       return snapshot.docs.map((doc) => Snippet.fromJson(doc.data())).toList();
     });
@@ -155,6 +184,10 @@ class FirestoreService {
   Future<void> deleteSnippet(String id) async {
     final userDoc = _userDoc;
     if (userDoc == null) return;
-    await userDoc.collection('snippets').doc(id).delete();
+    try {
+      await userDoc.collection('snippets').doc(id).delete();
+    } catch (e) {
+      print('Error deleting snippet: $e');
+    }
   }
 }

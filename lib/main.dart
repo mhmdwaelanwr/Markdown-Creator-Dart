@@ -62,6 +62,7 @@ void main() {
 
       firebaseInitialized = true;
       debugPrint('🛡️ Firebase Engine: ACTIVE');
+      await AuthService.loadAdminEmails();
     } catch (e) {
       debugPrint('⚠️ Firebase Engine: OFFLINE MODE (Subscription services limited)');
     }

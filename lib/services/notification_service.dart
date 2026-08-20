@@ -54,7 +54,7 @@ class NotificationService {
 
     // Get the token for individual targeting (optional)
     String? token = await _messaging.getToken();
-    debugPrint("📱 FCM Token: $token");
+    // Token stored securely, not logged in production
     
     // Subscribe to a general topic
     await _messaging.subscribeToTopic('all_users');

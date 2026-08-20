@@ -29,8 +29,15 @@ class PreferencesService {
   static const String keyHasSeenOnboarding = 'hasSeenOnboarding';
   static const String keyHasSeenSetupWizard = 'hasSeenSetupWizard';
 
+  SharedPreferences? _prefs;
+
+  Future<SharedPreferences> _getInstance() async {
+    _prefs ??= await SharedPreferences.getInstance();
+    return _prefs!;
+  }
+
   Future<ThemeMode> loadThemeMode() async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await _getInstance();
     if (prefs.containsKey(keyIsDarkMode)) {
       final isDark = prefs.getBool(keyIsDarkMode) ?? false;
       return isDark ? ThemeMode.dark : ThemeMode.light;
@@ -39,7 +46,7 @@ class PreferencesService {
   }
 
   Future<void> saveThemeMode(ThemeMode mode) async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await _getInstance();
     if (mode == ThemeMode.system) {
       await prefs.remove(keyIsDarkMode);
     } else {
@@ -48,7 +55,7 @@ class PreferencesService {
   }
 
   Future<List<ReadmeElement>> loadElements() async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await _getInstance();
     final elementsJson = prefs.getString(keyElements);
     if (elementsJson != null) {
       try {
@@ -62,13 +69,13 @@ class PreferencesService {
   }
 
   Future<void> saveElements(List<ReadmeElement> elements) async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await _getInstance();
     final elementsJson = jsonEncode(elements.map((e) => e.toJson()).toList());
     await prefs.setString(keyElements, elementsJson);
   }
 
   Future<Map<String, String>> loadVariables() async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await _getInstance();
     final variablesJson = prefs.getString(keyVariables);
     if (variablesJson != null) {
       try {
@@ -82,53 +89,53 @@ class PreferencesService {
   }
 
   Future<void> saveVariables(Map<String, String> variables) async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await _getInstance();
     final variablesJson = jsonEncode(variables);
     await prefs.setString(keyVariables, variablesJson);
   }
 
   Future<void> saveString(String key, String value) async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await _getInstance();
     await prefs.setString(key, value);
   }
 
   Future<String?> loadString(String key) async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await _getInstance();
     return prefs.getString(key);
   }
 
   Future<void> saveBool(String key, bool value) async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await _getInstance();
     await prefs.setBool(key, value);
   }
 
   Future<bool?> loadBool(String key) async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await _getInstance();
     return prefs.getBool(key);
   }
 
   Future<void> saveInt(String key, int value) async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await _getInstance();
     await prefs.setInt(key, value);
   }
 
   Future<int?> loadInt(String key) async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await _getInstance();
     return prefs.getInt(key);
   }
 
   Future<void> saveStringList(String key, List<String> value) async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await _getInstance();
     await prefs.setStringList(key, value);
   }
 
   Future<List<String>?> loadStringList(String key) async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await _getInstance();
     return prefs.getStringList(key);
   }
 
   Future<void> remove(String key) async {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.remove(key);
+    final prefs = await _getInstance();
+    await prefs.remove(key);
   }
 }

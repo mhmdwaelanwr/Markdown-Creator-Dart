@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
@@ -11,6 +12,9 @@ class LibraryProvider with ChangeNotifier {
   final PreferencesService _prefsService = PreferencesService();
   final FirestoreService _firestoreService = FirestoreService();
   final AuthService _authService = AuthService();
+  
+  StreamSubscription? _projectsSubscription;
+  StreamSubscription? _snippetsSubscription;
   
   final bool isFirebaseAvailable;
   
@@ -57,16 +61,17 @@ class LibraryProvider with ChangeNotifier {
   void _listenToCloudChanges() {
     if (!isFirebaseAvailable) return;
 
-    _firestoreService.getProjects().listen((cloudProjects) {
+    _projectsSubscription?.cancel();
+    _projectsSubscription = _firestoreService.getProjects().listen((cloudProjects) {
       if (cloudProjects.isNotEmpty) {
-        // Simple merge logic: Cloud wins for shared IDs, but keep local-only
         _projects = cloudProjects;
         _saveLocalLibrary();
         notifyListeners();
       }
     });
 
-    _firestoreService.getSnippets().listen((cloudSnippets) {
+    _snippetsSubscription?.cancel();
+    _snippetsSubscription = _firestoreService.getSnippets().listen((cloudSnippets) {
       if (cloudSnippets.isNotEmpty) {
         _snippets = cloudSnippets;
         _saveLocalLibrary();
@@ -148,5 +153,12 @@ class LibraryProvider with ChangeNotifier {
       _firestoreService.deleteSnippet(id);
     }
     notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    _projectsSubscription?.cancel();
+    _snippetsSubscription?.cancel();
+    super.dispose();
   }
 }

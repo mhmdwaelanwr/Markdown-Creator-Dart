@@ -56,7 +56,11 @@ class SubscriptionService extends ChangeNotifier {
 
   Future<void> updateProStatus(String uid, bool status) async {
     if (!isFirebaseAvailable) return;
-    await FirebaseFirestore.instance.collection('users').doc(uid).update({'isPro': status});
+    try {
+      await FirebaseFirestore.instance.collection('users').doc(uid).update({'isPro': status});
+    } catch (e) {
+      debugPrint('Error updating Pro status: $e');
+    }
     notifyListeners();
   }
 }

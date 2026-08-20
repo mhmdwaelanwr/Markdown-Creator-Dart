@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ enum DeviceMode { desktop, tablet, mobile }
 class ProjectProvider with ChangeNotifier {
   final PreferencesService _prefsService = PreferencesService();
   final FirestoreService _firestoreService = FirestoreService();
+  StreamSubscription? _cloudTemplatesSubscription;
   
   final List<ReadmeElement> _elements = [];
   List<ProjectTemplate> _cloudTemplates = [];
@@ -95,7 +97,8 @@ class ProjectProvider with ChangeNotifier {
   }
 
   void _listenToCloudTemplates() {
-    _firestoreService.getPublicTemplates().listen((data) {
+    _cloudTemplatesSubscription?.cancel();
+    _cloudTemplatesSubscription = _firestoreService.getPublicTemplates().listen((data) {
       _cloudTemplates = data.map((map) {
         final List<dynamic> elementsJson = map['elements'] ?? [];
         return ProjectTemplate(
@@ -109,6 +112,12 @@ class ProjectProvider with ChangeNotifier {
   }
 
   List<ProjectTemplate> get allTemplates => [...Templates.all, ..._cloudTemplates];
+
+  @override
+  void dispose() {
+    _cloudTemplatesSubscription?.cancel();
+    super.dispose();
+  }
 
   Future<void> _loadPreferences() async {
     _themeMode = await _prefsService.loadThemeMode();
@@ -302,8 +311,6 @@ class ProjectProvider with ChangeNotifier {
     await _prefsService.saveVariables(_variables);
     await _prefsService.saveStringList(PreferencesService.keySnapshots, _snapshots);
     
-    // Simulate delay for smooth UI feedback
-    await Future.delayed(const Duration(milliseconds: 800));
     _isSaving = false; // End saving animation
     notifyListeners();
   }

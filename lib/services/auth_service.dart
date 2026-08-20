@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:flutter/foundation.dart';
@@ -17,8 +18,18 @@ class AuthService {
     }
   }
 
-  // Official developer email for Owner privileges
-  static const String adminEmail = "mhmdwaelanwr@gmail.com"; 
+  // Admin emails - loaded from Firestore or fallback to default
+  static const String defaultAdminEmail = "mhmdwaelanwr@gmail.com";
+  static List<String> _adminEmails = [defaultAdminEmail];
+  
+  static Future<void> loadAdminEmails() async {
+    try {
+      final doc = await FirebaseFirestore.instance.collection('settings').doc('app_config').get();
+      if (doc.exists && doc.data()?['adminEmails'] != null) {
+        _adminEmails = List<String>.from(doc.data()!['adminEmails']);
+      }
+    } catch (_) {}
+  }
 
   FirebaseAuth get _auth => FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
@@ -37,7 +48,7 @@ class AuthService {
     return _auth.currentUser;
   }
 
-  bool get isAdmin => isReady && currentUser?.email == adminEmail;
+  bool get isAdmin => isReady && currentUser?.email != null && _adminEmails.contains(currentUser!.email);
 
   // --- Social Logins ---
 
