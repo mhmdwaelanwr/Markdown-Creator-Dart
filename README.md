@@ -53,6 +53,16 @@ flutter pub get
 flutter run
 ```
 
+### Optional GIPHY integration
+
+The source repository does not include a GIPHY API key. Supply your own key at runtime when you want to use the GIF picker:
+
+```bash
+flutter run --dart-define=GIPHY_API_KEY=YOUR_GIPHY_KEY
+```
+
+For release builds, pass the same define through your build/release environment. Do not commit API keys, service credentials, signing material, or local environment files to the repository.
+
 ### Tagged builds
 
 See the repository's [Releases](https://github.com/mhmdwaelanwr/Markdown-Creator-Dart/releases) page for published artifacts when available.
